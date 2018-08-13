@@ -74,6 +74,16 @@ $(function() {
           * clicked and does it hide when clicked again.
           */
 
+          it('changes visibility when the menu is clicked', function() {
+            var trigger = document.querySelector('.menu-icon-link');
+            var menu = document.body;
+
+            trigger.click();
+            expect(menu.classList).not.toContain('menu-hidden');
+            trigger.click();
+            expect(menu.classList).toContain('menu-hidden');
+          });
+          
     });
 
     /* TODO: Write a new test suite named "Initial Entries" */
