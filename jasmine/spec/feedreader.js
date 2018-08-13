@@ -83,10 +83,12 @@ $(function() {
             trigger.click();
             expect(menu.classList).toContain('menu-hidden');
           });
-          
+
     });
 
     /* TODO: Write a new test suite named "Initial Entries" */
+
+    describe('Initial entries', function() {
 
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
@@ -94,6 +96,23 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+
+
+         beforeEach(function(done) {
+          loadFeed(0, function() {
+             done();
+           });
+         });
+
+         var entry = document.querySelector('.feed').getElementsByClassName('entry');
+
+         it('calls loadFeed function and completes its work', function(done) {
+
+           expect(entry.length).toBeGreaterThan(0);
+           done();
+         });
+
+    });
 
     /* TODO: Write a new test suite named "New Feed Selection" */
 
