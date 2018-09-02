@@ -107,7 +107,6 @@ $(function() {
          var entry = document.querySelector('.feed').getElementsByClassName('entry');
 
          it('calls loadFeed function and completes its work', function(done) {
-
            expect(entry.length).toBeGreaterThan(0);
            done();
          });
@@ -123,16 +122,32 @@ $(function() {
          * Remember, loadFeed() is asynchronous.
          */
 
+         /*
+         1. load initial feed entry
+         2. load new feed entry
+         3. compare html() content
+         */
+
+         var initialFeedItem;
+         var nextFeedItem;
+
          beforeEach(function(done) {
            loadFeed(0, function() {
+             initialFeedItem = $('.feed').html();
+             // Display in console to check
+             console.log(initialFeedItem);
+             loadFeed(1, function() {
+               newFeedItem = $('.feed').html();
+               // Display in console to check
+               console.log(newFeedItem);
                done();
+             })
            });
          });
 
-         it('content actually changes', function(done) {
-           expect(firstFeedItem).not.toBe(secondFeedItem);
+         it('content actually changes when a new feed is loaded', function(done) {
+           expect(initialFeedItem).not.toBe(newFeedItem);
            done();
          });
-
     });
 }());
